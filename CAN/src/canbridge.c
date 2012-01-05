@@ -5,13 +5,9 @@
 #include <string.h>
 #include <signal.h>
 
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <netinet/in.h>
-
-#include <sys/types.h>
 #include <sys/wait.h>
-#include <sys/socket.h>
+
+#include "shared.h"
 
 /* Default parameters */
 #define DEFAULT_HOST1 "localhost"
@@ -26,7 +22,6 @@
 
 void show_help(char * cmd);
 int parse_subopt(char * optarg, char ** host, char ** port, char ** format);
-int open_connection(char * host, char * port);
 void close_connections(void);
 void child_quit(int signal);
 
@@ -279,42 +274,6 @@ int parse_subopt(char * optarg, char ** host, char ** port, char ** format)
 		}
 	}
 	return 0;
-}
-
-int open_connection(char * host, char * port)
-{
-	struct hostent * hostent;
-	struct servent * servent;
-	struct sockaddr_in address;
-	int numero, sock;
-
-	memset(&address, 0, sizeof(struct sockaddr_in));
-	if (inet_aton(host, &(address.sin_addr)) == 0) {
-		if ((hostent = gethostbyname(host)) == NULL) {
-			fprintf(stderr, "Unknow host\n");
-			return -1;
-		}
-		address.sin_addr.s_addr = ((struct in_addr *) (hostent->h_addr))->s_addr;
-	}
-	if (sscanf(port, "%d", &numero) == 1) {
-		address.sin_port = htons(numero);
-	} else if ((servent = getservbyname(port, "tcp")) == NULL) {
-		fprintf(stderr, "Unknow service %s\n", port);
-		return -1;
-	} else {
-		address.sin_port = servent->s_port;
-	}
-	address.sin_family = AF_INET;
-	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-		perror("socket");
-		return -1;
-	}
-	if (connect(sock, (struct sockaddr *) &address, sizeof(struct sockaddr_in)) < 0) {
-		perror("connect");
-		return -1;
-	}
-
-	return sock;
 }
 
 void close_connections(void)

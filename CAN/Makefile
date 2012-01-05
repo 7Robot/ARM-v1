@@ -1,31 +1,39 @@
-#EXEC = bin/emitter bin/converter
 SRC = $(wildcard src/*.c)
+SHAREDSRC = $(wildcard src/shared/*.c)
+SHAREDOBJ = $(subst src/shared, obj, $(SHAREDSRC:.c=.o))
 EXEC = $(subst src, bin, $(SRC:.c=))
 
 CC = gcc
 LD = gcc
 MAKE = make
 
-CFLAGS = -std=gnu99 -Iinclude
+CFLAGS = -std=gnu99 -Iinclude -Isrc/shared
 LDFLAGS = -Llibcan -lcan -lpthread
 DEBUG = -g
 WARNING = -Wall -pedantic
 OPTIMIZE = 
 #-O3
 
-all: sharedlib bindir $(EXEC)
+all: libcan obj $(SHAREDOBJ) bin $(EXEC)
 
-sharedlib:
+libcan:
 	@make -C libcan
 
-bindir:
-	@if [ ! -d bin ]; then mkdir bin; fi
+obj:
+	@mkdir obj
 
-bin/%: src/%.c
+bin:
+	@mkdir bin
+
+obj/%.o: src/shared/%.c
+	$(CC) $(DEBUG) $(WARNING) $(OPTIMIZE) $(CFLAGS) -o $@ -c $^
+
+bin/%: src/%.c $(SHAREDOBJ)
 	$(LD) $(DEBUG) $(WARNING) $(OPTIMIZE) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 clean:
 	@rm -f bin/*
+	@rm -f obj/*
 
 mrproper: clean
 
