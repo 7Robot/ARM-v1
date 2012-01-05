@@ -156,7 +156,7 @@ int can_hex_write(int fd, struct can_t const * packet)
 	}
 	for (int i = 0 ; i < packet->length ; i++) {
 		if (i == 0) {
-			sprintf(buffer, "\t%X", can_byte_get(packet, i));
+			sprintf(buffer, "\t%02X", can_byte_get(packet, i));
 		} else {
 			sprintf(buffer, " %02X", can_byte_get(packet, i));
 		}
