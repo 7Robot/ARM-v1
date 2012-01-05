@@ -136,8 +136,6 @@ int main(int argc, char * argv[])
 				}
 				if (opt_host1 != NULL)
 					host1 = opt_host1;
-				else
-					printf("opt_host1 null !\n");
 				if (opt_port1 != NULL)
 					port1 = opt_port1;
 				if (opt_format1 != NULL)
