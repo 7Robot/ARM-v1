@@ -12,10 +12,13 @@ OPTIMIZE = -O3
 SRC = $(wildcard src/*.cc)
 OBJ = $(subst src, obj, $(SRC:.cc=.o))
 
-all: $(EXEC)
+all: obj $(EXEC)
 
 $(EXEC): $(OBJ)
 	$(LD) $(DEBUG) $(WARNING) $(LDFLAGS) -o $@ $^
+
+obj:
+	@mkdir obj
 
 obj/%.o: src/%.cc
 	$(CPP) $(CPPFLAGS) $(OPTIMIZE) $(DEBUG) $(WARNING) -o $@ -c $^
