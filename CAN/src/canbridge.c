@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <sys/socket.h>
 
 /* Default parameters */
@@ -27,6 +28,7 @@ void show_help(char * cmd);
 int parse_subopt(char * optarg, char ** host, char ** port, char ** format);
 int open_connection(char * host, char * port);
 void close_connections(void);
+void child_quit(int signal);
 
 int pid1, pid2;
 
@@ -186,9 +188,15 @@ int main(int argc, char * argv[])
 			exit(0);
 		}
 		setsid();
+		if (fork() != 0) {
+			exit(0);
+		}
+		for (int i = 0 ; i < getdtablesize() ; i++) {
+			close(i);
+		}
 	}
 
-	signal(SIGCHLD, exit);
+	signal(SIGCHLD, child_quit);
 
 	switch ((pid1 = fork())) {
 		case -1:
@@ -215,13 +223,7 @@ int main(int argc, char * argv[])
 			exit(1);
 	}
 
-	if (daemon) {
-		exit(0);
-	} else {
-		while (1) {
-			pause();
-		}
-	}
+	pause();
 
 	return 0;
 }
@@ -323,4 +325,15 @@ void close_connections(void)
 		kill(pid1, SIGTERM);
 	if (pid2 != 0)
 		kill(pid2, SIGTERM);
+}
+
+void child_quit(int signal)
+{
+	int status;
+	int pid = wait(&status);
+	if (pid == pid1)
+		kill(pid2, SIGTERM);
+	else
+		kill(pid1, SIGTERM);
+	exit(status);
 }

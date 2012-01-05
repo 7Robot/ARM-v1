@@ -169,7 +169,6 @@ void * bin_listener (void * arg)
 		}
 	}
 	
-	fprintf(stderr, "listener end\n");
 	return NULL;
 }
 
