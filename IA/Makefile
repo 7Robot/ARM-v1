@@ -9,7 +9,7 @@ DEBUG = -g
 WARNING = -Wall -pedantic
 OPTIMIZE = -O3
 
-SRC = $(wildcard src/*.cc)
+SRC = $(wildcard src/*.cxx)
 OBJ = $(subst src, obj, $(SRC:.cc=.o))
 
 all: obj $(EXEC)
