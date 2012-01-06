@@ -11,12 +11,11 @@ CFLAGS = -std=gnu99 -Iinclude -Isrc/shared
 LDFLAGS = -Llibcan -lcan -lpthread
 DEBUG = -g
 WARNING = -Wall -pedantic
-OPTIMIZE = 
-#-O3
+OPTIMIZE = -O3
 
-all: libcan obj $(SHAREDOBJ) bin $(EXEC)
+all: libcan/libcan.so obj $(SHAREDOBJ) bin $(EXEC)
 
-libcan:
+libcan/libcan.so:
 	@make -C libcan
 
 obj:
@@ -32,10 +31,10 @@ bin/%: src/%.c $(SHAREDOBJ)
 	$(LD) $(DEBUG) $(WARNING) $(OPTIMIZE) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 clean:
-	@rm -f bin/*
-	@rm -f obj/*
+	@rm -rf obj
 
 mrproper: clean
+	@rm -rf bin
 
 rebuild: mrproper all
 
