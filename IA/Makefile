@@ -10,7 +10,7 @@ WARNING = -Wall -pedantic
 OPTIMIZE = -O3
 
 SRC = $(wildcard src/*.cxx)
-OBJ = $(subst src, obj, $(SRC:.cc=.o))
+OBJ = $(subst src, obj, $(SRC:.cxx=.o))
 
 all: obj $(EXEC)
 
@@ -20,7 +20,7 @@ $(EXEC): $(OBJ)
 obj:
 	@mkdir obj
 
-obj/%.o: src/%.cc
+obj/%.o: src/%.cxx
 	$(CPP) $(CPPFLAGS) $(OPTIMIZE) $(DEBUG) $(WARNING) -o $@ -c $^
 
 clean:

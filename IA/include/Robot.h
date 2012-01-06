@@ -4,14 +4,12 @@
 class Robot {
 
 	public:
-	
-	Robot();
-	int init();
-	int addSharp(int id);
-	int addMotor(int id);
+		Robot();
+		int init();
+		int addSharp(int id);
+		int addMotor(int id);
 
 	private:
-
 
 
 };
