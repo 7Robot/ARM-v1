@@ -1,14 +1,15 @@
-#ifndef _SHARP_H_
-#define _SHARP_H_
+#ifndef _MOTORCMD_H_
+#define _MOTORCMD_H_
 
 #include "Task.h"
 
-class Sharp : public Task
+class MotorCmd : public Task
 {
 	public:
-		Sharp();
+		MotorCmd();
 		int getSensorValue;
 		void exec(void);
+		void operator()();
 
 	private:
 		int priority;

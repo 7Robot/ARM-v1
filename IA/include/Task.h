@@ -4,7 +4,9 @@
 class Task
 {
 	public:
-		virtual void exec(void) = 0;
+		Task();
+		Task(int priority);
+		virtual void operator()();
 
 	protected:
 		int priority;

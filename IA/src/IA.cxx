@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Queue.h"
-//#include "Sharp.h"
+#include "MotorCmd.h"
 
 using namespace std;
 
@@ -11,9 +11,11 @@ int main()
 
 	Queue queue;
 
-	//Sharp sharp;
+	MotorCmd mc;
 
-	//queue.push(sharp);
+	queue.push(mc);
+
+	queue.pop();
 
 	return 0;
 }

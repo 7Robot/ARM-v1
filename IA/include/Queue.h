@@ -10,9 +10,10 @@ class Queue
 	public:
 		Queue();
 		void push(Task &task);
+		void pop();
 
 	private:
-		queue<int> &tasks;
+		std::queue<Task> *tasks;
 
 };
 
