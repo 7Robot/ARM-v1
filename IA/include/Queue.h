@@ -1,14 +1,19 @@
 #ifndef _QUEUE_H_
 #define _QUEUE_H_
 
-#include <priority_queue>
+#include <queue>
 
 #include "Task.h"
 
 class Queue
 {
+	public:
+		Queue();
+		void push(Task &task);
+
 	private:
-		priority_queue<Task> queue;
-}
+		queue<int> &tasks;
+
+};
 
 #endif

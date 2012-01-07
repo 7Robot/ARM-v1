@@ -1,13 +1,16 @@
+
+#include <iostream>
+
 #include "Task.h"
 #include "Sharp.h"
 
-Sharp::Sharp()
+using namespace std;
+
+Sharp::Sharp() : priority(0), sensorValue(0)
 {
-	priority = 0;
-	sensorValue = 0;
 }
 
-Sharp::exec()
+void Sharp::exec()
 {
-	cout << "Sharp::exec()" << endl;
+	std::cout << "Sharp::exec()" << std::endl;
 }

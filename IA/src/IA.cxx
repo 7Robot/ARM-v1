@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "Robot.h"
+#include "Queue.h"
+//#include "Sharp.h"
 
 using namespace std;
 
@@ -8,8 +9,11 @@ int main()
 {
 	cout << "Starting IA …" << endl;
 
-	Robot robot;
-	robot.addSharp(2);
+	Queue queue;
+
+	//Sharp sharp;
+
+	//queue.push(sharp);
 
 	return 0;
 }

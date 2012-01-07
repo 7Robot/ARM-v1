@@ -1,10 +1,18 @@
+#ifndef _SHARP_H_
+#define _SHARP_H_
+
 #include "Task.h"
 
 class Sharp : public Task
 {
-	private:
-		int sensorValue;
+	public:
+		Sharp();
+		int getSensorValue;
+		void exec(void);
 
 	private:
-		int getSensorValue;
+		int priority;
+		int sensorValue;
 };
+
+#endif
