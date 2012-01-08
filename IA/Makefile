@@ -3,11 +3,12 @@ EXEC = ia
 CPP = g++
 LD = g++
 
-CPPFLAGS = -Iinclude
-LDFLAGS = 
+CPPFLAGS = -Iinclude -std=c++0x
+LDFLAGS = -lpthread
 DEBUG = -g
 WARNING = -Wall -pedantic
-OPTIMIZE = -O3
+OPTIMIZE = 
+#-O3
 
 SRC = $(wildcard src/*.cxx)
 OBJ = $(subst src, obj, $(SRC:.cxx=.o))

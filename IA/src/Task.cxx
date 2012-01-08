@@ -1,7 +1,11 @@
 #include <iostream>
+
 #include "Task.h"
 
-Task::Task() : m_priority(0)
+Task::Task() :
+	m_priority(50),
+	m_autofree(true),
+	m_blocking(false)
 {
 }
 
@@ -16,7 +20,20 @@ bool Task::operator<(Task * t)
 
 void Task::operator()()
 {
-	this->exec();
+	if (this->m_blocking) {
+		this->exec();
+	} else {
+		pthread_t id;
+		this->m_pth = &id;
+		pthread_create(&id, NULL, Task::thread, (void *) this);
+	}
+}
+
+void * Task::thread(void * arg)
+{
+	Task * task = (Task *) arg;
+	task->exec();
+	return NULL;
 }
 
 int Task::getPriority()

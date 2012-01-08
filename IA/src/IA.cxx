@@ -17,5 +17,7 @@ int main()
 
 	queue.pop();
 
+	sleep(1);
+
 	return 0;
 }

@@ -6,14 +6,12 @@
 class MotorCmd : public Task
 {
 	public:
-		MotorCmd();
 		int getSensorValue;
 		void exec(void);
 		~MotorCmd();
 
 	private:
-		int priority;
-		int sensorValue;
+		int m_sensor_value;
 };
 
 #endif

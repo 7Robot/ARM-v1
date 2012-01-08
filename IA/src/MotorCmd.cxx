@@ -5,12 +5,7 @@
 
 using namespace std;
 
-MotorCmd::MotorCmd()
-{
-	std::cout << "motor constructor" << std::endl;
-}
-
-MotorCmd::exec()
+void MotorCmd::exec()
 {
 	std::cout << "motor exec" << std::endl;
 }
