@@ -5,15 +5,17 @@
 
 Queue::Queue()
 {
-	tasks = new std::queue<Task>;
+	tasks = new std::priority_queue<Task*>;
 }
 
-void Queue::push(Task &task)
+void Queue::push(Task * task)
 {
 	tasks->push(task);
 }
 
 void Queue::pop()
 {
-	tasks->front()();
+	Task * task;
+	task = tasks->top();
+	(*task)();
 }

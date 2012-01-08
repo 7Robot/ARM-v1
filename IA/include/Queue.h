@@ -9,11 +9,11 @@ class Queue
 {
 	public:
 		Queue();
-		void push(Task &task);
+		void push(Task * task);
 		void pop();
 
 	private:
-		std::queue<Task> *tasks;
+		std::priority_queue<Task*> *tasks;
 
 };
 

@@ -13,7 +13,7 @@ int main()
 
 	MotorCmd mc;
 
-	queue.push(mc);
+	queue.push(&mc);
 
 	queue.pop();
 

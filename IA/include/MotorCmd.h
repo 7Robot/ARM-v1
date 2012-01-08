@@ -9,7 +9,7 @@ class MotorCmd : public Task
 		MotorCmd();
 		int getSensorValue;
 		void exec(void);
-		void operator()();
+		~MotorCmd();
 
 	private:
 		int priority;

@@ -1,20 +1,25 @@
 #include <iostream>
 #include "Task.h"
 
-Task::Task() : priority(0)
+Task::Task() : m_priority(0)
 {
 }
 
-Task::Task(int p) : priority(p)
+Task::~Task()
 {
+}
+
+bool Task::operator<(Task * t)
+{
+	return this->m_priority < t->m_priority;
 }
 
 void Task::operator()()
 {
-	std::cout << "generic task" << std::endl;
+	this->exec();
 }
 
-//bool Task::operator<(Task t)
-//{
-//	return this.priority < t.priority;
-//}
+int Task::getPriority()
+{
+	return this->m_priority;
+}
