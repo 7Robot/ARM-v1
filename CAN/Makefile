@@ -47,5 +47,6 @@ install-lib:
 
 install:
 	cp bin/* /usr/local/bin
+	cp libcan/include/libcan.h /usr/local/include
 
 .PHONY: clean mrproper

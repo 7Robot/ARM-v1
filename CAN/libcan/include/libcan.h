@@ -28,6 +28,7 @@
 
 #ifdef __cplusplus
 extern "C" {
+	namespace libcan {
 #endif
 
 /***********************
@@ -103,6 +104,7 @@ int can_listen_on(can_ctx * ctx, int fd, enum can_f format);
 
 
 #ifdef __cplusplus
+	} /* namespace libcan */
 } /* extern "C" */
 #endif
 

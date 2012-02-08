@@ -3,16 +3,19 @@
 
 struct callback {
 	void (*sharpAnswer)(int sharpID, int sharpValue);
+	int sharpInt;
 	void (*lineCaptorAnswer)(int exleft, int left, int right, int exright);
+	int lineCaptorInt;
 };
 
 class CallbackSet
 {
 	public:
 		CallbackSet();
+		CallbackSet(bool warning);
 		struct callback cb;
-		//void (*sharpAnswer)(int sharpID, int sharpValue);
-		//void (*lineCaptorAnswer)(int exleft, int left, int right, int exright);
+		static void sharpAnswer(int sharpID, int sharpValue);
+		static void lineCaptorAnswer(int exleft, int left, int right, int exright);
 
 };
 

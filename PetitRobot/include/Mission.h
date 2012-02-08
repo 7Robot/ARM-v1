@@ -11,7 +11,7 @@ class Mission
 		virtual void run() = 0;
 		CallbackSet * getCallbackSet();
 
-	private:
+	protected:
 		CallbackSet cbs;
 
 };

@@ -4,7 +4,7 @@ CPP = g++
 LD = g++
 
 CPPFLAGS = -Iinclude
-LDFLAGS = 
+LDFLAGS = -lcan -lpthread
 DEBUG = -g
 WARNING = -Wall -pedantic
 OPTIMIZE = -O3
