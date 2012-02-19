@@ -1,3 +1,0 @@
-Il faut faire des write de packet tous d'un coup pour éviter de se bouffer le nez
-inter-process
-Implémenter on_exit et rm_callback dans write.c
